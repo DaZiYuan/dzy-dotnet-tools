@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace DZY.WinAPI.Extension
+namespace WinAPI.Extension
 {
     public static class ProcessExtension
     {

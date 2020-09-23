@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DZY.WinAPI
+namespace WinAPI
 {
     [Flags]
     public enum BbFlags : byte //Blur Behind Flags

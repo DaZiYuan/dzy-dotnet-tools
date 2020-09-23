@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DZY.WinAPI.Desktop.API
+namespace WinAPI.Desktop.API
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct COLORREF

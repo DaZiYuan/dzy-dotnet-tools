@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DZY.WinAPI.Helpers
+namespace WinAPI.Helpers
 {
     public class OtherProgramChecker
     {

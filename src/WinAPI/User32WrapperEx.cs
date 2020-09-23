@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Interop;
-using static DZY.WinAPI.User32Wrapper;
+using static WinAPI.User32Wrapper;
 
-namespace DZY.WinAPI
+namespace WinAPI
 {
     public static class User32WrapperEx
     {

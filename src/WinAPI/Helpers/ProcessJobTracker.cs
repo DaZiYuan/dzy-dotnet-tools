@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DZY.WinAPI.Helpers
+namespace WinAPI.Helpers
 {
     public class ProcessJobTracker : IDisposable
     {

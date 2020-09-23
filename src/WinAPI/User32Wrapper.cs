@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DZY.WinAPI
+namespace WinAPI
 {
     #region  structs
     /// <summary>
