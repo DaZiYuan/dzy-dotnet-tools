@@ -1,0 +1,21 @@
+﻿<Window
+    x:Class="WinAPI.Tester.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WinAPI.Tester"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <Button Click="Button_Click">CheckFullScreen</Button>
+            <Button Click="BtnWindowsSettingTest_Click">Windows Setting</Button>
+            <Button Click="BtnCreateProcess_Click">CreateProcess</Button>
+            <Button Click="BtnProcessJobTracker_Click">ProcessJobTrackerTest</Button>
+            <Button Click="BtnTest_Click">Test</Button>
+        </StackPanel>
+    </Grid>
+</Window>

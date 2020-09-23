@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <Version>2.0.19</Version>
   </PropertyGroup>
 
   <ItemGroup>
