@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Common.Helpers
@@ -23,7 +24,7 @@ namespace Common.Helpers
         {
             try
             {
-                var json = JsonConvert.SerializeObject(obj, Formatting.None);
+                var json = JsonSerializer.Serialize(obj, obj.GetType());
 
                 if (!string.IsNullOrEmpty(outputSavePath))
                 {
@@ -75,7 +76,7 @@ namespace Common.Helpers
             {
                 if (string.IsNullOrEmpty(jsonString))
                     return default;
-                T result = JsonConvert.DeserializeObject<T>(jsonString);
+                T result = JsonSerializer.Deserialize<T>(jsonString);
                 return result;
             }
             catch (Exception)
