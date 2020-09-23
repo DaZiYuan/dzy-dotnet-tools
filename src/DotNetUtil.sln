@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAPI", "WinAPI\WinAPI.csproj", "{6B6F3E29-8C49-44BA-A6E1-0A5E554514C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPI", "WinAPI\WinAPI.csproj", "{6B6F3E29-8C49-44BA-A6E1-0A5E554514C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetUtil.WinAPI", "DotNetUtil.WinAPI", "{E1B329B7-967E-4A5A-B050-304B38B4BB75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A474399B-7C01-4AB6-98FA-4BEB9917E639}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

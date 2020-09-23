@@ -41,7 +41,6 @@ namespace WinAPI
     }
     public class DwmapiWrapper
     {
-
         [DllImport("dwmapi.dll")]
         public static extern int DwmEnableBlurBehindWindow(IntPtr hWnd, ref BbStruct blurBehind);
 
