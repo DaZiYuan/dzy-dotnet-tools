@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Common.Helpers
 {
     public class JsonHelper
     {
-        public static Task<string> JsonSerializeAsync(Object obj, string outputSavePath = null)
+        public static Task<string> JsonSerializeAsync(object obj, string outputSavePath = null)
         {
             return Task.Run(() =>
             {
@@ -20,7 +19,7 @@ namespace Common.Helpers
         /// <summary>
         /// JSON序列化
         /// </summary>
-        public static string JsonSerialize(Object obj, string outputSavePath = null)
+        public static string JsonSerialize(object obj, string outputSavePath = null)
         {
             try
             {
@@ -75,13 +74,13 @@ namespace Common.Helpers
             try
             {
                 if (string.IsNullOrEmpty(jsonString))
-                    return default(T);
+                    return default;
                 T result = JsonConvert.DeserializeObject<T>(jsonString);
                 return result;
             }
             catch (Exception)
             {
-                return default(T);
+                return default;
             }
         }
 
