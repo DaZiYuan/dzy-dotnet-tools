@@ -261,7 +261,7 @@ namespace WinAPI
         [DllImport("kernel32.dll")]
         public static extern int ResumeThread(IntPtr hThread);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr CreateJobObject(object a, string lpName);
+        public static extern IntPtr CreateJobObject(IntPtr a, string lpName);
         [DllImport("kernel32.dll")]
         public static extern bool SetInformationJobObject(IntPtr job, JobObjectInfoType infoType, IntPtr lpJobObjectInfo, uint cbJobObjectInfoLength);
         [DllImport("kernel32.dll", SetLastError = true)]
