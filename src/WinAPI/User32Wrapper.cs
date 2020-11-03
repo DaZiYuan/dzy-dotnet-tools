@@ -1030,5 +1030,7 @@ namespace WinAPI
         public static extern IntPtr SetFocus(IntPtr hWnd);
         [DllImport("User32.dll")]
         public static extern int SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr SetActiveWindow(IntPtr hWnd);
     }
 }
