@@ -19,5 +19,18 @@ namespace Common.Compressions
                     break;
             }
         }
+
+        internal static Task<bool> CanOpen(string file)
+        {
+            string extension = Path.GetExtension(file);
+            switch (extension)
+            {
+                case ".7z":
+                    return SevenZip.CanOpenAsync(file);
+                case ".zip":
+                    return Zip.CanOpenAsync(file);
+            }
+            return Task.FromResult(false);
+        }
     }
 }

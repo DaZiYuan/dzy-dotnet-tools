@@ -88,8 +88,10 @@ namespace Common.Helpers
             CancellationToken cancellationToken
             )
         {
-            await DownloadFileAsync(url, downloadDist, cancellationToken, downloadProgress);
-
+            if (!File.Exists(downloadDist) || !await CompressionHelper.CanOpen(downloadDist))
+            {
+                await DownloadFileAsync(url, downloadDist, cancellationToken, downloadProgress);
+            }
             await CompressionHelper.Decompress(downloadDist, decompressDist, cancellationToken, decompressProgress);
 
             if (deleteFile)

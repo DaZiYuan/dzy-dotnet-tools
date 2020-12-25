@@ -27,13 +27,14 @@ namespace Common.Compressions
             foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
             {
                 token.ThrowIfCancellationRequested();
+                long tmpSize = entry.Size;//解压后，清零了，提前保存
                 entry.WriteToDirectory(distPath, new ExtractionOptions()
                 {
                     ExtractFullPath = true,
                     Overwrite = true
                 });
 
-                _completed += entry.Size;
+                _completed += tmpSize;
 
                 progress?.Report((_completed, _total));
             }
