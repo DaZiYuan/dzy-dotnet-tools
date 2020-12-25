@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -14,6 +13,9 @@ namespace Common.Compressions
             {
                 case ".7z":
                     await SevenZip.ExtractAsync(sourceFile, distPath, token, progress);
+                    break;
+                case ".zip":
+                    await Zip.ExtractAsync(sourceFile, distPath, token, progress);
                     break;
             }
         }
