@@ -83,9 +83,10 @@ namespace Common.Helpers
             string downloadDist,
             string decompressDist,
             bool deleteFile,
-            CancellationToken cancellationToken,
             Progress<(float competed, float total)> downloadProgress,
-            Progress<(float competed, float total)> decompressProgress)
+            Progress<(float competed, float total)> decompressProgress,
+            CancellationToken cancellationToken
+            )
         {
             await DownloadFileAsync(url, downloadDist, cancellationToken, downloadProgress);
 
@@ -93,7 +94,7 @@ namespace Common.Helpers
 
             if (deleteFile)
             {
-                await Task.Run(() => File.Delete(downloadDist));
+                await Task.Run(() => File.Delete(downloadDist), cancellationToken);
             }
         }
     }

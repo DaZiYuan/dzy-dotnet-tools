@@ -12,7 +12,7 @@ namespace Common.Compressions
             string extension = Path.GetExtension(sourceFile);
             switch (extension)
             {
-                case ".7zp":
+                case ".7z":
                     await SevenZip.ExtractAsync(sourceFile, distPath, token, progress);
                     break;
             }
