@@ -47,6 +47,7 @@ namespace Common.Helpers
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex);
                 return false;
             }
         }
