@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 
-namespace Common.Helpers
+namespace Common.Windows.Helpers
 {
     public class DesktopStartupHelper : IStartupManager
     {
@@ -49,10 +49,12 @@ namespace Common.Helpers
             }
             catch (ArgumentException ae)
             {
+                System.Diagnostics.Debug.WriteLine(ae);
                 return null;
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e);
                 return null;
             }
         }
@@ -79,6 +81,7 @@ namespace Common.Helpers
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e);
                 return Task.FromResult(false);
             }
             finally
@@ -92,6 +95,7 @@ namespace Common.Helpers
                     }
                     catch (Exception e)
                     {
+                        System.Diagnostics.Debug.WriteLine(e);
                     }
                 }
             }
@@ -117,6 +121,7 @@ namespace Common.Helpers
             }
             catch (Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e);
                 return Task.FromResult(false);
             }
             finally
@@ -130,6 +135,7 @@ namespace Common.Helpers
                     }
                     catch (Exception e)
                     {
+                        System.Diagnostics.Debug.WriteLine(e);
                     }
                 }
             }

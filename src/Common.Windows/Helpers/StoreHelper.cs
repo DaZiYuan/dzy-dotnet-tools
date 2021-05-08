@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Services.Store;
-
-namespace Util.Common.Helpers
+using Windows.System;
+namespace Common.Windows.Helpers
 {
     public class StoreHelper
     {
@@ -106,7 +106,7 @@ namespace Util.Common.Helpers
             //旧方法，不推荐的方式.但是推荐的方式获取不到ID
             var pfn = Package.Current.Id.FamilyName;
             var uri = new Uri($"ms-windows-store://review/?PFN={pfn}");
-            bool success = await Windows.System.Launcher.LaunchUriAsync(uri);
+            bool success = await Launcher.LaunchUriAsync(uri);
             return success;
         }
 
@@ -116,7 +116,7 @@ namespace Util.Common.Helpers
 
             var pfn = Package.Current.Id.FamilyName;
             var uri = new Uri($"ms-windows-store://pdp/?PFN={pfn}");
-            bool success = await Windows.System.Launcher.LaunchUriAsync(uri);
+            bool success = await Launcher.LaunchUriAsync(uri);
             return success;
         }
 

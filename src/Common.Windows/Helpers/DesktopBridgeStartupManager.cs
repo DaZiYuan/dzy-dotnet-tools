@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Microsoft.Win32;
 
-namespace Common.Helpers
+namespace Common.Windows.Helpers
 {
     public interface IStartupManager
     {
