@@ -2,6 +2,7 @@
 using SharpCompress.Archives;
 using SharpCompress.Archives.SevenZip;
 using SharpCompress.Common;
+using SharpCompress.Readers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,18 +25,24 @@ namespace Common.Compressions
             _completed = 0;
             using var archive = SevenZipArchive.Open(sourceFile);
             _total = archive.Entries.Sum(m => m.Size);
-            foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+
+            var reader = archive.ExtractAllEntries();
+            //foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+            while (reader.MoveToNextEntry())
             {
                 token.ThrowIfCancellationRequested();
-                entry.WriteToDirectory(distPath, new ExtractionOptions()
-                {
-                    ExtractFullPath = true,
-                    Overwrite = true
-                });
+                if (!reader.Entry.IsDirectory)
+                    reader.WriteEntryToDirectory(distPath, new ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
 
-                _completed += entry.Size;
+                //entry.WriteToDirectory(distPath, new ExtractionOptions()
+                //{
+                //    ExtractFullPath = true,
+                //    Overwrite = true
+                //});
 
-                progress?.Report(((float)_completed, _total));
+                _completed += reader.Entry.Size;
+
+                progress?.Report((_completed, _total));
             }
         }
 
