@@ -47,7 +47,6 @@ namespace WinAPI.Tester
             desktopFactory.SetSlideshowOptions(DesktopSlideshowOptions.DSO_SHUFFLEIMAGES, 1000 * 60);
             desktopFactory.SetSlideshowOptions(DesktopSlideshowOptions.DSO_SHUFFLEIMAGES, 1000 * 60 * 60 * 24);
             desktopFactory.GetSlideshowOptions(out DesktopSlideshowOptions option1s, out uint sli1de);
-
         }
 
         private void BtnWindowsSettingTest_Click(object sender, RoutedEventArgs e)
@@ -92,6 +91,17 @@ namespace WinAPI.Tester
             if (pj == null)
                 pj = new ProcessJobTracker();
             pj.AddProcess(p);
+        }
+
+        private void BtnSetBGColor_Click(object sender, RoutedEventArgs e)
+        {
+            var test = DesktopWallpaperFactory.Create();
+            var c = test.GetBackgroundColor();
+            //test.SetBackgroundColor(new COLORREF());
+            test.SetBackgroundColor(c);
+            test.SetBackgroundColor(4098320);
+            test.SetBackgroundColor(0);
+            //test.SetBackgroundColor(0);
         }
     }
 }

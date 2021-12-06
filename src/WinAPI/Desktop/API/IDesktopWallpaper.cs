@@ -59,9 +59,13 @@ namespace WinAPI.Desktop.API
 
         RECT GetMonitorRECT([MarshalAs(UnmanagedType.LPWStr)] string monitorID);
 
-        void SetBackgroundColor([MarshalAs(UnmanagedType.U4)] COLORREF color);
+        void SetBackgroundColor([MarshalAs(UnmanagedType.U4)] uint color);
+        //void SetBackgroundColor(COLORREF color);
+        [return: MarshalAs(UnmanagedType.U4)]
+        uint GetBackgroundColor();
 
-        COLORREF GetBackgroundColor();
+        //COLORREF GetBackgroundColor();
+        //uint GetBackgroundColor();
 
         void SetPosition([MarshalAs(UnmanagedType.I4)] DesktopWallpaperPosition position);
 
