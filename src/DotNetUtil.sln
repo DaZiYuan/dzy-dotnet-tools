@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPI", "WinAPI\WinAPI.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetUtil.WinAPI", "DotNetUtil.WinAPI", "{E1B329B7-967E-4A5A-B050-304B38B4BB75}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A474399B-7C01-4AB6-98FA-4BEB9917E639}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPI.Tester", "WinAPI.Tester\WinAPI.Tester.csproj", "{B3BE60C3-440C-4FC4-B9A4-CFDAD9AC562F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetUtil.Common", "DotNetUtil.Common", "{14497CA5-C5DE-4340-94AC-FB47CD2ED73C}"

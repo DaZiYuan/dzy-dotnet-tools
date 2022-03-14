@@ -21,27 +21,15 @@ namespace Common.Apps.Helpers
             _Key = key;
         }
 
-        private string GetMd5(string filename)
-        {
-            using (var md5 = System.Security.Cryptography.MD5.Create())
-            {
-                using (var stream = System.IO.File.OpenRead(filename))
-                {
-                    var hash = md5.ComputeHash(stream);
-                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-                }
-            }
-        }
-
-        private RegistryKey OpenRegKey(string name, bool writable, RegistryHive hive = RegistryHive.CurrentUser)
+        private static RegistryKey? OpenRegKey(string name, bool writable, RegistryHive hive = RegistryHive.CurrentUser)
         {
             // we are building x86 binary for both x86 and x64, which will
             // cause problem when opening registry key
             // detect operating system instead of CPU
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException(null, nameof(name));
             try
             {
-                RegistryKey userKey = RegistryKey.OpenBaseKey(hive,
+                RegistryKey? userKey = RegistryKey.OpenBaseKey(hive,
                         Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32)
                     .OpenSubKey(name, writable);
                 return userKey;
@@ -60,7 +48,7 @@ namespace Common.Apps.Helpers
 
         public Task<bool> Set(bool enabled)
         {
-            RegistryKey runKey = null;
+            RegistryKey? runKey = null;
             try
             {
                 runKey = OpenRegKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
@@ -102,7 +90,7 @@ namespace Common.Apps.Helpers
 
         public Task<bool> Check()
         {
-            RegistryKey runKey = null;
+            RegistryKey? runKey = null;
             try
             {
                 runKey = OpenRegKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);

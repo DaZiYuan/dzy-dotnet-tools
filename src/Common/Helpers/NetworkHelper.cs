@@ -12,7 +12,7 @@ namespace Common.Helpers
 {
     public class NetworkHelper
     {
-        public static NetworkHelper SharedInstance { get; private set; }
+        public static NetworkHelper? SharedInstance { get; private set; }
 
         public static int GetAvailablePort(int startingPort)
         {
@@ -42,20 +42,20 @@ namespace Common.Helpers
             return port;
         }
 
-        public static async Task DownloadFileAsync(string uri, string distFile, CancellationToken cancellationToken, IProgress<(float compete, float total)> progress = null)
+        public static async Task DownloadFileAsync(string uri, string distFile, CancellationToken cancellationToken, IProgress<(float compete, float total)>? progress = null)
         {
-            using HttpClient client = new HttpClient();
+            using HttpClient client = new();
             Debug.WriteLine($"download {uri}");
             using HttpResponseMessage response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
             await Task.Run(() =>
             {
                 var dir = Path.GetDirectoryName(distFile);
-                if (!Directory.Exists(dir))
+                if (dir != null && !Directory.Exists(dir))
                     Directory.CreateDirectory(dir);
             });
 
-            using FileStream distFileStream = new FileStream(distFile, FileMode.OpenOrCreate, FileAccess.Write);
+            using FileStream distFileStream = new(distFile, FileMode.OpenOrCreate, FileAccess.Write);
             if (progress != null)
             {
                 long length = response.Content.Headers.ContentLength ?? -1;

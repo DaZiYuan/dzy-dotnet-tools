@@ -22,7 +22,7 @@ namespace Common.Helpers
             var name = "PATH";
             var scope = EnvironmentVariableTarget.Process;
             var oldValue = Environment.GetEnvironmentVariable(name, scope);
-            var newValue = oldValue.Replace(dir, "");
+            var newValue = oldValue?.Replace(dir, "");
             Environment.SetEnvironmentVariable(name, newValue, scope);
         }
     }

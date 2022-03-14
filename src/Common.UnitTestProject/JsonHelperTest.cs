@@ -16,7 +16,7 @@ namespace Common.UnitTestProject
         [TestMethod]
         public void Test()
         {
-            TestObj obj = new TestObj();
+            TestObj obj = new();
             var json = JsonHelper.JsonSerialize(obj);
             Assert.AreEqual(json, "{\"PInt\":0,\"PString\":\"1\",\"PDouble\":2.1}");
 

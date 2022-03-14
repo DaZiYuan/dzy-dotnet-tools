@@ -7,7 +7,7 @@ namespace Common.Helpers
 {
     public class IOHelper
     {
-        public static void CopyFileToDir(string sourcePath, string dir, string targetFileName = null)
+        public static void CopyFileToDir(string sourcePath, string dir, string? targetFileName = null)
         {
             if (!File.Exists(sourcePath))
                 return;
@@ -15,7 +15,7 @@ namespace Common.Helpers
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            FileInfo file = new FileInfo(sourcePath);
+            FileInfo file = new(sourcePath);
             if (string.IsNullOrEmpty(targetFileName))
                 targetFileName = file.Name;
 

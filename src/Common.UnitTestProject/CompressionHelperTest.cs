@@ -27,7 +27,6 @@ namespace Common.UnitTestProject
                 System.Diagnostics.Debug.WriteLine(ex);
                 throw;
             }
-            var test = 1;
         }
     }
 }
