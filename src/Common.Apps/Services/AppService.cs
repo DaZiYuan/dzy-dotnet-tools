@@ -25,16 +25,17 @@ namespace Common.Apps.Services
             _configService = configService;
         }
 
-        public void Init()
+        public void Init(string i18nRelativeDir, bool catchError = true)
         {
-            I18n();
-            CatchApplicationError();
+            InitI18n(i18nRelativeDir);
+            if (catchError)
+                CatchApplicationError();
         }
 
-        private static void I18n()
+        private static void InitI18n(string relativeDir)
         {
             string appDir = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
-            string path = Path.Combine(appDir, "Assets\\i18n");
+            string path = Path.Combine(appDir, relativeDir);
             LanService.Init(new JsonDB(path), true);
         }
 
