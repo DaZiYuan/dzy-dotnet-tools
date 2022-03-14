@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
 
 namespace Common.Windows.Helpers
 {
-    public class DesktopStartupHelper : IStartupManager
+    public class DesktopStartupHelper
     {
         // see https://stackoverflow.com/questions/12945805/odd-c-sharp-path-issue
         // net core 获取出来是dll，而framework是exe。所以暴露出来让外面传
