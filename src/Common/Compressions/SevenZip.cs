@@ -4,6 +4,7 @@ using SharpCompress.Archives.SevenZip;
 using SharpCompress.Common;
 using SharpCompress.Readers;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +26,8 @@ namespace Common.Compressions
             _completed = 0;
             using var archive = SevenZipArchive.Open(sourceFile);
             _total = archive.Entries.Sum(m => m.Size);
+            if (!Directory.Exists(distPath))
+                Directory.CreateDirectory(distPath);
 
             var reader = archive.ExtractAllEntries();
             //foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))

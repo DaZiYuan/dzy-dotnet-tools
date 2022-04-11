@@ -14,7 +14,7 @@ namespace Common.UnitTestProject
     public class JsonHelperTest
     {
         [TestMethod]
-        public void Test()
+        public void JsonSerialize()
         {
             TestObj obj = new();
             var json = JsonHelper.JsonSerialize(obj);
