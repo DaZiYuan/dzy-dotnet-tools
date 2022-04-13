@@ -1,17 +1,11 @@
-﻿using PInvoke;
-using System.Runtime.InteropServices;
+﻿using Common.WinAPI.Native;
+using PInvoke;
 
 namespace Common.WinAPI
 {
     public class User32Ex
     {
-        #region native 替代 pinvoke支持还不够好的方法
-        delegate bool MonitorEnumDelegate(IntPtr hMonitor, IntPtr hdcMonitor, ref RECT lprcMonitor, int dwData);
-        [DllImport("user32.dll")]
-        static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, MonitorEnumDelegate lpfnEnum, int dwData);
-        [DllImport("user32.dll")]
-        static extern bool GetMonitorInfo(IntPtr hmonitor, [In, Out] User32.MONITORINFO monitorInfo);
-        #endregion
+
         public static List<User32.MONITORINFO> GetMonitorInfos()
         {
             List<User32.MONITORINFO> tmp = new();
@@ -23,7 +17,7 @@ namespace Common.WinAPI
                     tmp.Add(info);
                 return true;
             }
-            if (EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, callback, 0))
+            if (NativeUser32Ex.EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, callback, 0))
             {
                 return tmp;
             }
