@@ -22,7 +22,7 @@ namespace Common.Apps.Services
 
         public object? UserConfig { get; private set; }
 
-        public ConfigService(Logger logger,InitServiceOption option)
+        public ConfigService(Logger logger, InitServiceOption option)
         {
             _logger = logger;
             AppConfigDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\{option.AppName}\\";
@@ -33,19 +33,26 @@ namespace Common.Apps.Services
             LogDir = $"{AppConfigDir}/Logs";
         }
 
-        public async Task LoadUserConfig<T>()
+        public async Task<T> LoadUserConfigAsync<T>() where T : new()
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
+             {
+                 return LoadUserConfig<T>();
+             });
+        }
+        public T LoadUserConfig<T>() where T : new()
+        {
+            try
             {
-                try
-                {
-                    UserConfig = JsonHelper.JsonDeserializeFromFile<T>(UserConfigFile);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Warn(ex, "LoadUserConfig ex");
-                }
-            });
+                var res = JsonHelper.JsonDeserializeFromFile<T>(UserConfigFile);
+                UserConfig = res;
+                return res ?? new T();
+            }
+            catch (Exception ex)
+            {
+                _logger.Warn(ex, "LoadUserConfig ex");
+            }
+            return new T();
         }
 
         public async void SaveUserConfig(object config)
