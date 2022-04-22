@@ -10,7 +10,7 @@ namespace Common.UnitTestProject
         [TestMethod]
         public void GetMonitorInfos()
         {
-            var test = Screen.AllScreens;
+            //var test = Screen.AllScreens;
             var infos = User32Ex.GetMonitorInfos();
             Assert.IsTrue(infos.Count > 0);
         }
