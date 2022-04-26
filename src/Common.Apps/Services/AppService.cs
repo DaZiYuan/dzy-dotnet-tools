@@ -1,9 +1,11 @@
-﻿using MultiLanguageForXAML;
+﻿using Common.Helpers;
+using MultiLanguageForXAML;
 using NLog;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Common.Apps.Services
@@ -15,6 +17,7 @@ namespace Common.Apps.Services
     {
         private readonly Logger _logger;
         private readonly ConfigService _configService;
+        private readonly Debouncer _openFolderDebouncer = new();
         public string AppName { get; private set; }
 
 
@@ -71,20 +74,25 @@ namespace Common.Apps.Services
         {
             var ex = e.Exception;
             _logger.Error(ex);
-            System.Windows.MessageBox.Show($"Error:{ex.Message}. \r \r ${AppName} has encountered an error and will automatically open the log folder. \r \r please sumibt these logs to us, thank you");
+            MessageBox.Show($"Error:{ex.Message}. \r \r ${AppName} has encountered an error and will automatically open the log folder. \r \r please sumibt these logs to us, thank you");
             OpenConfigFolder();
         }
         public void OpenConfigFolder()
         {
-            try
+            _openFolderDebouncer.Execute(new Func<Task>(() =>
             {
-                Process.Start("Explorer.exe", _configService.AppConfigDir);
-            }
-            catch (Exception ex)
-            {
-                _logger.Warn("OpenConfigFolder:" + ex);
-                System.Windows.MessageBox.Show("OpenConfigFolder:" + ex);
-            }
+                try
+                {
+                    Process.Start("Explorer.exe", _configService.AppConfigDir);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Warn("OpenConfigFolder:" + ex);
+                    MessageBox.Show("OpenConfigFolder:" + ex);
+                }
+                return Task.CompletedTask;
+            }), 1000);
+
         }
     }
 }
