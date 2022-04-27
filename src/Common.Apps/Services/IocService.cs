@@ -36,7 +36,6 @@ namespace Common.Apps.Services
             services.AddSingleton<ConfigService>();
             services.AddSingleton<AppService>();
 
-
             //services.AddTransient<MainViewModel>();
             //services.AddTransient<ProjectsViewModel>();
             //services.AddSingleton<ISettingsService, SettingsService>();
