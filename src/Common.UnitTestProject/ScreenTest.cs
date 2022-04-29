@@ -16,25 +16,28 @@ namespace Common.UnitTestProject
         public async Task GetMaximizedScreen()
         {
             ScreenHelper helper = new();
-            var res = helper.GetMaximizedScreen();
+            var res = helper.GetMaximizedScreen(false, true);
             Assert.IsTrue(res == null);
 
-            //open fullscren notepad
+            //过滤id检查
             ProcessStartInfo startInfo = new("notepad.exe");
             startInfo.WindowStyle = ProcessWindowStyle.Maximized;
             startInfo.UseShellExecute = true;
             var p = Process.Start(startInfo);
+            res = helper.GetMaximizedScreen(false, false, p.Id);
+            await Task.Delay(1000);
+            p.Kill();
+            Assert.IsTrue(res.Count == 0);
+
+            //全屏检查
+            startInfo = new("notepad.exe");
+            startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            startInfo.UseShellExecute = true;
+            p = Process.Start(startInfo);
             res = helper.GetMaximizedScreen();
             await Task.Delay(1000);
             p.Kill();
-            Assert.IsTrue(res != null && res.Count > 0);
-        }
-
-        [TestMethod]
-        public void IsAnyScreenMaximized()
-        {
-            ScreenHelper helper = new();
-            bool res = helper.IsAnyScreenMaximized();
+            Assert.IsTrue(res.Count == 0);
         }
     }
 }
