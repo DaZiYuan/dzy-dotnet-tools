@@ -55,19 +55,25 @@ namespace Common.Apps.Services
             return new T();
         }
 
-        public async void SaveUserConfig(object config)
+        public void SaveUserConfig(object config)
         {
             UserConfig = config;
+
+            try
+            {
+                JsonHelper.JsonSerialize(config, UserConfigFile);
+            }
+            catch (Exception ex)
+            {
+                _logger.Warn(ex, "SaveUserConfig ex");
+            }
+        }
+
+        public async Task SaveUserConfigAsync(object config)
+        {
             await Task.Run(() =>
             {
-                try
-                {
-                    JsonHelper.JsonSerialize(config, UserConfigFile);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Warn(ex, "SaveUserConfig ex");
-                }
+                SaveUserConfig(config);
             });
         }
     }
