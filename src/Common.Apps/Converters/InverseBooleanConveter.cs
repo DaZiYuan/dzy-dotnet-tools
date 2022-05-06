@@ -8,8 +8,8 @@ namespace Common.Apps.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool)
-                return !(bool)value;
+            if (value is bool boolean)
+                return !boolean;
             return value;
         }
 

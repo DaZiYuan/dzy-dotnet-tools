@@ -10,9 +10,9 @@ namespace Common.Apps.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool flag = false;
-            if (value is bool)
+            if (value is bool boolean)
             {
-                flag = (bool)value;
+                flag = boolean;
             }
             else if (value is bool?)
             {
