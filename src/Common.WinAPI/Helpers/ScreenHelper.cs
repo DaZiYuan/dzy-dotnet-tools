@@ -72,6 +72,7 @@ namespace Common.WinAPI.Helpers
                     if (!getAllScreen)
                         return false;
                     //return true;
+                    throw new NotImplementedException();
                 }
                 return true;
             }

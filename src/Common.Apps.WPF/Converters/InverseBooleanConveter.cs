@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Common.Apps.Converters
+namespace Common.Apps.WPF.Converters
 {
     public class InverseBooleanConveter : IValueConverter
     {

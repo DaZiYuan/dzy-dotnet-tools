@@ -12,12 +12,13 @@ namespace Common.UnitTestProject
     [TestClass]
     public class ScreenTest
     {
+        //没有遮挡的情况下测试
         [TestMethod]
         public async Task GetMaximizedScreen()
         {
             ScreenHelper helper = new();
             var res = helper.GetMaximizedScreen(false, true);
-            Assert.IsTrue(res == null);
+            Assert.IsTrue(res.Count == 0);
 
             //过滤id检查
             ProcessStartInfo startInfo = new("notepad.exe");
