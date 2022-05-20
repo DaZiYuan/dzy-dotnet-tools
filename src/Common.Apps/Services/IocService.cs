@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using System;
-using System.Windows;
 
 namespace Common.Apps.Services
 {
@@ -9,7 +8,6 @@ namespace Common.Apps.Services
     public class InitServiceOption
     {
         public string? AppName { get; set; }
-
     }
 
     //https://docs.microsoft.com/zh-cn/windows/communitytoolkit/mvvm/Ioc
