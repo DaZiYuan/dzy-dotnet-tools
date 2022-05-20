@@ -20,7 +20,6 @@ namespace Common.Apps.Services
         private readonly Debouncer _openFolderDebouncer = new();
         public string AppName { get; private set; }
 
-
         public AppService(InitServiceOption option, Logger logger, ConfigService configService)
         {
             AppName = option.AppName!;
@@ -28,22 +27,8 @@ namespace Common.Apps.Services
             _configService = configService;
         }
 
-        public void Init(string i18nRelativeDir, bool catchError = true)
-        {
-            InitI18n(i18nRelativeDir);
-            if (catchError)
-                CatchApplicationError();
-        }
-
-        private static void InitI18n(string relativeDir)
-        {
-            string appDir = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
-            string path = Path.Combine(appDir, relativeDir);
-            LanService.Init(new JsonDB(path), true);
-        }
-
         //捕获异常
-        private void CatchApplicationError()
+        public void CatchApplicationError()
         {
             //日志路径
             var config = new NLog.Config.LoggingConfiguration();
