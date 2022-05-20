@@ -1,7 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Common.Apps.Helpers
@@ -17,35 +15,11 @@ namespace Common.Apps.Helpers
 
         public DesktopStartupHelper(string key, string executablePath)
         {
-            _executablePath = executablePath;
             _Key = key;
+            _executablePath = executablePath;
         }
 
-        private static RegistryKey? OpenRegKey(string name, bool writable, RegistryHive hive = RegistryHive.CurrentUser)
-        {
-            // we are building x86 binary for both x86 and x64, which will
-            // cause problem when opening registry key
-            // detect operating system instead of CPU
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException(null, nameof(name));
-            try
-            {
-                RegistryKey? userKey = RegistryKey.OpenBaseKey(hive,
-                        Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32)
-                    .OpenSubKey(name, writable);
-                return userKey;
-            }
-            catch (ArgumentException ae)
-            {
-                System.Diagnostics.Debug.WriteLine(ae);
-                return null;
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e);
-                return null;
-            }
-        }
-
+        #region public
         public Task<bool> Set(bool enabled)
         {
             RegistryKey? runKey = null;
@@ -127,5 +101,34 @@ namespace Common.Apps.Helpers
                 }
             }
         }
+        #endregion
+
+        #region private
+        private static RegistryKey? OpenRegKey(string name, bool writable, RegistryHive hive = RegistryHive.CurrentUser)
+        {
+            // we are building x86 binary for both x86 and x64, which will
+            // cause problem when opening registry key
+            // detect operating system instead of CPU
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException(null, nameof(name));
+            try
+            {
+                RegistryKey? userKey = RegistryKey.OpenBaseKey(hive,
+                        Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32)
+                    .OpenSubKey(name, writable);
+                return userKey;
+            }
+            catch (ArgumentException ae)
+            {
+                System.Diagnostics.Debug.WriteLine(ae);
+                return null;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+                return null;
+            }
+        }
+
+        #endregion
     }
 }
