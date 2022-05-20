@@ -16,7 +16,6 @@ namespace Common.Apps.Services
     {
         private readonly Logger _logger;
         public string UserConfigDir { get; private set; }
-        public string UserConfigFile { get; private set; }
         public string AppConfigDir { get; private set; }
         public string LogDir { get; private set; }
 
@@ -29,7 +28,6 @@ namespace Common.Apps.Services
 
             //卸载时不清除
             UserConfigDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\{option.AppName}\\UserData";
-            UserConfigFile = Path.Combine(UserConfigDir, "userconfig.json");
             LogDir = $"{AppConfigDir}/Logs";
         }
 
@@ -44,13 +42,14 @@ namespace Common.Apps.Services
         {
             try
             {
-                var res = JsonHelper.JsonDeserializeFromFile<T>(UserConfigFile);
+                string configFile = Path.Combine(UserConfigDir, $"{typeof(T).Name}.json");
+                var res = JsonHelper.JsonDeserializeFromFile<T>(configFile);
                 UserConfig = res;
                 return res ?? new T();
             }
             catch (Exception ex)
             {
-                _logger.Warn(ex, "LoadUserConfig ex");
+                _logger.Warn(ex, $"Load {nameof(T)} ex");
             }
             return new T();
         }
@@ -61,7 +60,8 @@ namespace Common.Apps.Services
 
             try
             {
-                JsonHelper.JsonSerialize(config, UserConfigFile);
+                string configFile = Path.Combine(UserConfigDir, $"{config.GetType().Name}.json");
+                JsonHelper.JsonSerialize(config, configFile);
             }
             catch (Exception ex)
             {
