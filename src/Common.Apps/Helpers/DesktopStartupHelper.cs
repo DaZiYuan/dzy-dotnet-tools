@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Threading.Tasks;
 
 namespace Common.Apps.Helpers
 {
@@ -20,7 +19,7 @@ namespace Common.Apps.Helpers
         }
 
         #region public
-        public Task<bool> Set(bool enabled)
+        public bool Set(bool enabled)
         {
             RegistryKey? runKey = null;
             try
@@ -28,7 +27,7 @@ namespace Common.Apps.Helpers
                 runKey = OpenRegKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
                 if (runKey == null)
                 {
-                    return Task.FromResult(false);
+                    return false;
                 }
                 if (enabled)
                 {
@@ -38,12 +37,12 @@ namespace Common.Apps.Helpers
                 {
                     runKey.DeleteValue(_Key);
                 }
-                return Task.FromResult(true);
+                return true;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e);
-                return Task.FromResult(false);
+                return false;
             }
             finally
             {
@@ -62,7 +61,7 @@ namespace Common.Apps.Helpers
             }
         }
 
-        public Task<bool> Check()
+        public bool Check()
         {
             RegistryKey? runKey = null;
             try
@@ -70,20 +69,20 @@ namespace Common.Apps.Helpers
                 runKey = OpenRegKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
                 if (runKey == null)
                 {
-                    return Task.FromResult(false);
+                    return false;
                 }
                 string[] runList = runKey.GetValueNames();
                 foreach (string item in runList)
                 {
                     if (item.Equals(_Key, StringComparison.OrdinalIgnoreCase))
-                        return Task.FromResult(true);
+                        return true;
                 }
-                return Task.FromResult(false);
+                return false;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e);
-                return Task.FromResult(false);
+                return false;
             }
             finally
             {
