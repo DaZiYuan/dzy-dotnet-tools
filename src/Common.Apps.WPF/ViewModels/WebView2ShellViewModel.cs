@@ -13,24 +13,10 @@ namespace Common.Apps.WPF.ViewModels
         #region construct
         public WebView2ShellViewModel()
         {
-            try
-            {
-                OpenDownloadUrlCommand = new AsyncRelayCommand(OpenDownloadUrl);
-                Initlizing = true;
-                var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
-            }
-            catch (WebView2RuntimeNotFoundException)
-            {
-                ShowTips = true;
-            }
-            finally
-            {
-                Initlizing = false;
-            }
+            OpenDownloadUrlCommand = new AsyncRelayCommand(OpenDownloadUrl);
         }
 
         #endregion
-
 
         #region properties
         bool _initlizing;
@@ -39,7 +25,7 @@ namespace Common.Apps.WPF.ViewModels
         public bool ShowTips { get => _showTips; set => SetProperty(ref _showTips, value); }
         #endregion
 
-        #region public
+        #region Command
         public IAsyncRelayCommand? OpenDownloadUrlCommand { get; }
 
         private Task OpenDownloadUrl()
@@ -56,6 +42,27 @@ namespace Common.Apps.WPF.ViewModels
             }
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region Public
+
+        public void CheckWebView2()
+        {
+            try
+            {
+                Initlizing = true;
+                var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+            }
+            catch (WebView2RuntimeNotFoundException)
+            {
+                ShowTips = true;
+            }
+            finally
+            {
+                Initlizing = false;
+            }
+        }
+
         #endregion
     }
 }
