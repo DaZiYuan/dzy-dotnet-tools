@@ -46,21 +46,18 @@ namespace Common.Apps.WPF.ViewModels
 
         #region Public
 
-        public void CheckWebView2()
+        public bool CheckWebView2()
         {
             try
             {
-                Initlizing = true;
                 var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+                return true;
             }
             catch (WebView2RuntimeNotFoundException)
             {
                 ShowTips = true;
             }
-            finally
-            {
-                Initlizing = false;
-            }
+            return false;
         }
 
         #endregion
